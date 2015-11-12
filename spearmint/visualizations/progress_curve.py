@@ -298,15 +298,14 @@ def main(dirs,
         hypers          = db.load(experiment_name, 'hypers')
         tasks           = parse_tasks_from_jobs(jobs, experiment_name, options, input_space)
 
-        if rec_type == "model":
-            if mainfile is None:
-                main_file = options['main_file']
-            else:
-                main_file = mainfile
+        if mainfile is None:
+            main_file = options['main_file']
+        else:
+            main_file = mainfile
 
-            sys.path.append(options['main_file_path']) # TODO: make this nicer with proper importing
-            module          = importlib.import_module(main_file)
-            sys.path.remove(options['main_file_path'])
+        sys.path.append(options['main_file_path']) # TODO: make this nicer with proper importing
+        module          = importlib.import_module(main_file)
+        sys.path.remove(options['main_file_path'])
 
         obj, con        = get_objectives_and_constraints(options) # get the names
         obj = obj[0] # only one objective
@@ -580,7 +579,7 @@ if __name__ == '__main__':
     parser.add_option("--retro", action="store_true", dest="retro",
                       help="Load recommandations-retro instead of recommendations.")
     parser.add_option("--iter", dest="n_iter_spec",
-                      help="Uesd to specify a certain number of iterations to plot.",
+                      help="Used to specify a certain number of iterations to plot.",
                       type="int", default=None)
     parser.add_option("--violation-value", dest="violation_value",
                       help="The penalty value for violating the constraints.",
