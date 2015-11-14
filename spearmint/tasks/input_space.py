@@ -409,7 +409,7 @@ class InputSpace(object):
                 raise Exception("Unknown variable type: %s" % variable['type'])
 
         if squeeze:
-            V = np.squeeze(V)
+            V = V[0]
 
         return V
 
